@@ -36,4 +36,13 @@ public class Filesystem_Sanchez_212515965 {
             System.out.println("This drive exist, try again with other drive");
         }
     }
+    public void register(String new_user){
+        if(!list_users.contains(new_user)){
+            list_users.add(new_user);
+        }
+        else{
+            System.out.println("This user exist, try again with other user");
+        }
+
+    }
 }
