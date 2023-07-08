@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class Filesystem_Sanchez_212515965 {
-    String name_system;
-    Date date_now;
-    List<Drive> list_drive;
-    List<String> list_users;
-    String logged_in;
+    private String name_system;
+    private Date date_now;
+    private List<Drive> list_drive;
+    private List<String> list_users;
+    private String logged_in;
+    private List<String> path;
+    private String origin_path;
+    private List<String> rest_path;
     public boolean someone_login (){
         return !Objects.equals(this.logged_in, "");
     }
@@ -62,5 +65,27 @@ public class Filesystem_Sanchez_212515965 {
 
     public void logout(){
         this.logged_in = "";
+    }
+    public void switch_drive(String letter){
+        List<String> list_letter_drives = new ArrayList<>();
+        for(Drive drive : list_drive) {
+            list_letter_drives.add(drive.getLetter());
+        }
+
+        if(list_letter_drives.contains(letter)) {
+            if(someone_login()){
+                List<String> new_path = new ArrayList<>();
+                new_path.add(letter);
+                path = new_path;
+                origin_path = letter;
+                rest_path = new ArrayList<>();
+            }
+            else{
+                System.out.println("First logged in please");
+            }
+        }
+        else{
+            System.out.println("This drive don't exist, try again with other drive");
+        }
     }
 }
