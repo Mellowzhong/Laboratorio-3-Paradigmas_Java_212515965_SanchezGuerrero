@@ -14,6 +14,7 @@ public class Filesystem_Sanchez_212515965 {
     private List<String> path;
     private String origin_path;
     private List<String> rest_path;
+    private List<Elements> adds;
     public boolean someone_login (){
         return !Objects.equals(this.logged_in, "");
     }
@@ -86,6 +87,17 @@ public class Filesystem_Sanchez_212515965 {
         }
         else{
             System.out.println("This drive don't exist, try again with other drive");
+        }
+    }
+    public void make_directory(Elements new_folder){
+        List<Elements> content;
+
+        for(Drive drive : list_drive){
+            if(Objects.equals(drive.getLetter(), this.origin_path)){
+                content = drive.getContent();
+                content.add(new_folder);
+                (this.adds).add(new_folder);
+            }
         }
     }
 }
