@@ -100,4 +100,27 @@ public class Filesystem_Sanchez_212515965 {
             }
         }
     }
+    public void cd(String add_path){
+        if(someone_login() && path.size() >= 1) {
+            switch(add_path){
+                case "..":
+                    path.remove(path.size() - 1);
+
+                    break;
+
+                case "/":
+                    this.path.subList(1, path.size()).clear();
+
+                    break;
+
+                default:
+                    this.path.add(add_path);
+
+                    break;
+            }
+        }
+        else{
+            System.out.println("no se puede realizar esta accion");
+        }
+    }
 }
