@@ -17,12 +17,33 @@ public class Elements {
         this.content = new ArrayList<>();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public List<Elements> getContent() {
+        return content;
+    }
+
     @Override
     public String toString() {
         return "Elements{" +
                 "name='" + name + '\'' +
-                ", type='" + type + '\'' +
                 ", content=" + content +
+                ", creator_user='" + creator_user + '\'' +
+                ", creation_date=" + creation_date +
                 '}';
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
