@@ -89,15 +89,31 @@ public class Filesystem_Sanchez_212515965 {
             System.out.println("This drive don't exist, try again with other drive");
         }
     }
-    public void make_directory(Elements new_folder){
-        List<Elements> content;
+    public List<Elements> find_content(String origin_path, List<String> rest_path){
+        List<Elements> content = new ArrayList<>();
 
         for(Drive drive : list_drive){
-            if(Objects.equals(drive.getLetter(), this.origin_path)){
+            if(Objects.equals(drive.getLetter(), origin_path)){
                 content = drive.getContent();
-                content.add(new_folder);
-                (this.adds).add(new_folder);
             }
+        }
+
+        for(String path : rest_path) {
+            for(Elements folders : content){
+                if(Objects.equals(path, folders.getName())){
+                    content = folders.getContent();
+                }
+            }
+        }
+        return content;
+    }
+    public void make_directory(String folder_name, boolean hide, boolean read) {
+        if (path.size() > 0) {
+            List<Elements> Content = find_content(this.origin_path, this.rest_path);
+            String login_user = logged_in;
+            Content.add(new Folder(folder_name, "folder"));
+
+            System.out.println("No hay una ruta de origen donde agregar");
         }
     }
     public void cd(String add_path){
