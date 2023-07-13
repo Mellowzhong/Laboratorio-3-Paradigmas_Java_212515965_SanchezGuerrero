@@ -6,7 +6,7 @@ public class Drive {
     String letter;
     String name;
     int capacity;
-    List<Elements> content;
+    List<Folder_File_Father> content;
     public String getLetter() {
         return letter;
     }
@@ -16,7 +16,7 @@ public class Drive {
         this.capacity = capacity;
     }
 
-    public List<Elements> getContent() {
+    public List<Folder_File_Father> getContent() {
         return content;
     }
 }
