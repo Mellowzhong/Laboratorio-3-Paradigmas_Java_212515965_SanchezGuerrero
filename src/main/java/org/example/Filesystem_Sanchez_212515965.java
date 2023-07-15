@@ -130,6 +130,25 @@ public class Filesystem_Sanchez_212515965 {
             System.out.println("no se puede realizar esta accion");
         }
     }
+    public void add_file(String file_name, String file_content, boolean hide, boolean read){
+        List<Folder_File_Father> content = find_content(this.path.getOrigin_path(), this.path.getRest_path());
+        if(path.path_size() > 0){
+            List<String> name_type_file = List.of(file_name.split("\\."));
+            String login_user = getLogged_in();
+            Folder_File_Father new_file = new File(name_type_file.get(0), name_type_file.get(1), file_content, login_user);
+
+            if (!path_exist(name_type_file.get(0))){
+                content.add(new_file);
+            }else {
+                for(Folder_File_Father elements : content){
+                    content.remove(elements);
+                    content.add(new_file);
+                }
+            }
+        }else{
+            System.out.println("No hay una ruta de origen donde agregar");
+        }
+    }
     public List<Folder_File_Father> find_content(String origin_path, List<String> rest_path){
         List<Folder_File_Father> content = new ArrayList<>();
 

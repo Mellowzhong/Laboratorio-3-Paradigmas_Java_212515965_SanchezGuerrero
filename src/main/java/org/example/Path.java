@@ -37,7 +37,7 @@ public class Path {
         this.current_path = current_path;
     }
 
-    public int size(){
+    public int path_size(){
 
         return (this.current_path).size();
     }
