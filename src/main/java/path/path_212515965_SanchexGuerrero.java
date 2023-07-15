@@ -1,13 +1,12 @@
-package org.example;
+package path;
 
 import java.util.List;
 
-public class Path {
+public class path_212515965_SanchexGuerrero implements path_interface_212515965_SanchezGuerrero {
     private List<String> current_path;
     private String origin_path;
     private List<String> rest_path;
-
-    public Path(List<String> path, String origin_path, List<String> rest_path) {
+    public path_212515965_SanchexGuerrero(List<String> path, String origin_path, List<String> rest_path) {
         this.current_path = path;
         this.origin_path = origin_path;
         this.rest_path = rest_path;
@@ -37,11 +36,7 @@ public class Path {
         this.current_path = current_path;
     }
 
-    public int path_size(){
-
-        return (this.current_path).size();
-    }
-
+    public int path_size(){return (this.current_path).size();}
     @Override
     public String toString() {
         return "current_path=" + current_path +
