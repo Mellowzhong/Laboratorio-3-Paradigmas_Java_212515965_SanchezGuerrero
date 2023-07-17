@@ -1,10 +1,16 @@
 package org.example;
 
 import file_system_212515965_SanchezGuerrero.filesystem_212515965_SanchezGuerrero;
+import folder_file_212515965_SanchezGuerrero.file_212515965_SanchezGuerrero;
+import folder_file_212515965_SanchezGuerrero.folder_212515965_SanchezGuerrero;
+import folder_file_212515965_SanchezGuerrero.folder_file_father_212515965_SanchezGuerrero;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Clase Main en la cual se interactua con el usuario
+ */
 public class Main {
     public static void main(String[] args){
 
@@ -13,7 +19,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
         final int MENU_EXIT_OPTION = 4;
 
-        int choice, security_choice;
+        int choice, security_choice,second_choice;
 
         do {
             show_menu();
@@ -35,9 +41,9 @@ public class Main {
                         }
                         else{
                             show_second_menu();
-                            choice = input.nextInt();
+                            second_choice = input.nextInt();
 
-                            switch(choice){
+                            switch(second_choice){
 
                                 case 1:
                                     System.out.println("Escriba la letra");
@@ -74,7 +80,7 @@ public class Main {
                                     System.out.println("Escriba la letra");
                                     String letter = input.next();
 
-                                    file_system.switch_drive(letter.toUpperCase());
+                                    file_system.switch_drive(letter);
                                     break;
 
                                 case 6:
@@ -83,7 +89,7 @@ public class Main {
                                     System.out.println("Desea agregar atributos de seguridad?\n1.Si\n2.No\nIngrese la opcion:");
                                     security_choice = input.nextInt();
                                     if(security_choice == 1){
-                                        System.out.println("Escriba true o false si desea agregar el atributo\n");
+                                        System.out.println("Escriba true o false si desea agregar el atributo");
                                         System.out.println("Oculto");
                                         boolean hide = input.nextBoolean();
                                         System.out.println("Solo lectura");
@@ -99,13 +105,12 @@ public class Main {
                                 case 7:
                                     System.out.println("Escriba el directorio al que desea cambiar");
                                     String add_path = input.next();
-                                    List<String> list_path = List.of(add_path.split("/"));
-                                    file_system.cd(list_path);
+                                    file_system.cd(add_path);
 
                                     break;
 
                                 case 8:
-                                    System.out.println("Escriba el nombre del archivo (name.extension)");
+                                    System.out.println("Escriba el archivo (name.extension)");
                                     String file_name = input.next();
                                     System.out.println("Escriba el contenido");
                                     input.nextLine();
@@ -115,7 +120,7 @@ public class Main {
                                     security_choice = input.nextInt();
 
                                     if(security_choice == 1){
-                                        System.out.println("Escriba true o false si desea agregar el atributo\n");
+                                        System.out.println("Escriba true o false si desea agregar el atributo");
 
                                         System.out.println("Oculto");
                                         boolean hide = input.nextBoolean();
@@ -123,22 +128,29 @@ public class Main {
                                         System.out.println("Solo lectura");
                                         boolean read = input.nextBoolean();
 
-                                        file_system.add_file(file_name, file_content, hide, read);
+                                        List<String> name_type_file = List.of(file_name.split("\\."));
+
+                                        folder_file_father_212515965_SanchezGuerrero new_file = new file_212515965_SanchezGuerrero(name_type_file.get(0), name_type_file.get(1), file_content, file_system.getLogged_in(), hide, read);
+
+                                        file_system.add_file(new_file);
                                     }
                                     else{
-                                        file_system.add_file(file_name, file_content,false, false);
+                                        List<String> name_type_file = List.of(file_name.split("\\."));
+                                        folder_file_father_212515965_SanchezGuerrero new_file = new file_212515965_SanchezGuerrero(name_type_file.get(0), name_type_file.get(1), file_content, file_system.getLogged_in(), false, false);
+
+                                        file_system.add_file(new_file);
                                     }
                                     break;
 
                                 case 9:
-                                    System.out.println("Escriba el nombre del archivo o carpeta que desea borrar");
+                                    System.out.println("Escriba el nombre del archivo (name.extension) o carpeta que desea borrar ");
                                     String del_file = input.next();
 
                                     file_system.del(del_file);
                                     break;
 
                                 case 10:
-                                    System.out.println("Escriba el archivo o carpeta que desea copiar");
+                                    System.out.println("Escriba el nombre del archivo o carpeta que desea copiar");
                                     String copy_name = input.next();
                                     System.out.println("Escriba la ruta a la que desea copiar el archivo o carpeta");
                                     String target_path = input.next();
@@ -147,16 +159,16 @@ public class Main {
                                     break;
 
                                 case 11:
-                                    System.out.println("Escriba el archivo o carpeta que desea mover");
-                                    String move_file_name = input.next();
+                                    System.out.println("Escriba el nombre del archivo o carpeta que desea mover");
+                                    String move_name = input.next();
                                     System.out.println("Escriba la ruta a la que desea mover el archivo o carpeta");
                                     String move_target_path = input.next();
 
-                                    file_system.move(move_file_name, move_target_path);
+                                    file_system.move(move_name, move_target_path);
                                     break;
 
                                 case 12:
-                                    System.out.println("Escriba el nombre del archivo");
+                                    System.out.println("Escriba el archivo (name.extension) o carpeta");
                                     String file_folder_name = input.next();
                                     System.out.println("Escriba el nuevo nombre");
                                     String new_name = input.next();
@@ -234,7 +246,8 @@ public class Main {
         System.out.print("10. Copy\n");
         System.out.print("11. Move\n");
         System.out.print("12. Ren\n");
-        System.out.print("13. Dir");
+        System.out.print("13. Dir\n");
+        System.out.print("14. Format\n");
         System.out.print("\nIngrese su opcion: ");
     }
     //POner el rut y nombre en las clases
